@@ -17,4 +17,10 @@ add_action('rest_api_init', function () {
   error_log(print_r($routes, true));
 });
 
+// Tempo em que expira o token do JWT (No caso em 24h) - Assim o usuário precisa fazer o login no tempo determinado.
+function expire_token() {
+  return time() + (60 * 60 * 24)
+}
+add_action('jwt_auth_expire', 'expire_token');
+
 ?>
