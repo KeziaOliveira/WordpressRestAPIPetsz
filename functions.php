@@ -1,10 +1,18 @@
 <?php
 // Remove as rotas definidas pelo WordPress
-remove_action('rest_api_init', 'create_initial_rest_routes', 99);
+// remove_action('rest_api_init', 'create_initial_rest_routes', 99);
 
 // Linca a página do user no endpoints
 $dirbase = get_template_directory();
 require_once $dirbase . '/endpoints/user_post.php';
+require_once $dirbase . '/endpoints/user_get.php';
+
+require_once $dirbase . '/endpoints/photo_post.php';
+
+// Torna imagem em tamanho padrão
+update_option('large_size_w', 1000);
+update_option('large_size_h', 1000);
+update_option('large_crop', 1);
 
 // Modifica o prefixo da API de wp-json para json apenas
 // Necessário salvar os permalinks para dar um refresh nos URL's
@@ -18,9 +26,9 @@ add_action('rest_api_init', function () {
 });
 
 // Tempo em que expira o token do JWT (No caso em 24h) - Assim o usuário precisa fazer o login no tempo determinado.
-function expire_token() {
-  return time() + (60 * 60 * 24)
-}
-add_action('jwt_auth_expire', 'expire_token');
+// function expire_token() {
+//   return time() + (60 * 60 * 24)
+// };
+// add_action('jwt_auth_expire', 'expire_token');
 
 ?>
