@@ -18,6 +18,7 @@ function api_stats_get($request) {
   $query = new WP_Query($args);
   $posts = $query->posts;
 
+  // Forech loop 
   $stats = [];
   if ($posts) {
     foreach ($posts as $post) {
